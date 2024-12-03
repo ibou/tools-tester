@@ -40,9 +40,12 @@ class SuperTesterCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->success('SuperTester is a great tool to test your code!');
 
-        $result = $this->maSuperTesterConnection->getSuperTesterDataWithParams(
-            'SELECT * FROM property WHERE property_id > :id',
-            ['id' => 1]);
+        $sql = <<<SQL
+        SELECT * FROM property WHERE property_id = :id
+        SQL;
+
+
+        $result = $this->maSuperTesterConnection->getSuperTesterDataWithParams($sql, ['id' => 891]);
 
         dump($result);
 
